@@ -1,0 +1,37 @@
+{
+  "email": "test@gmail.com",
+  "password": "Cyber123",
+  "name": "Emre",
+  "surname": "Celik",
+  "favorite_coffees": [
+    {
+      "coffee": {
+        "id": 0,
+        "name": "Mocha",
+        "calories": "235"
+      }
+    },
+    {
+      "coffee": {
+        "id": 1,
+        "name": "Espresso",
+        "calories": "30"
+      }
+    },
+    {
+      "coffee": {
+        "id": 2,
+        "name": "Latte",
+        "calories": "75"
+      }
+    }
+  ],
+  "profile_photo": "https://picsum.photos/200",
+  "address": "8929 Brook Ave. Tewksbury, MA 01876",
+  "phone_number": "0432 333 2121",
+  "coffee_point": 5,
+  "comments": [
+    "Amazing coffee",
+    "I like it"
+  ]
+}
