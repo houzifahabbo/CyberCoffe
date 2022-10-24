@@ -1,6 +1,9 @@
+import 'package:coffee/product/constants/color_scheme.dart';
+import 'package:coffee/view/order/order_view/order_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:coffee/view/home/view/home_view.dart';
 import 'package:coffee/view/auth/login/view/login_view.dart';
+import 'package:coffee/view/view_model/bottom_nav_bar/bottom_nav_bar_view_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,24 +17,33 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          elevatedButtonTheme:  ElevatedButtonThemeData(
-            style:ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff4aa366),
-              //TODO public height and width
-              padding: EdgeInsets.symmetric(vertical:20, horizontal: 168),
-            ),
-          ),
-        ),
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          '/': (context) => LoginView(),
+          '/': (context) => const Values(),
+    }
+    );
+  }
+}
+class Values extends StatelessWidget {
+  const Values({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double phoneWidth=MediaQuery.of(context).size.width;
+    double phoneHeight = MediaQuery.of(context).size.height;
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/bottom',
+        routes: {
+          '/bottom': (context) => MainBottomNavBar(selectedIndex: 1),
+          '/login': (context) => const LoginView(),
+          '/home': (context) => const HomeView(),
+          '/order': (context) => const OrderView(),
         }
-        );
+    );
   }
 }
