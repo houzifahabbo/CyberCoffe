@@ -25,7 +25,7 @@ class _OrderViewState extends State<OrderView> {
     return Scaffold(
         appBar: mainAppBar("Sipariş Yarat"),
         body: Padding(
-            padding: EdgeInsets.only(top: phoneHeight * 0.02),
+            padding: EdgeInsets.symmetric(vertical: phoneHeight * 0.02),
             child: Column(children: [
               gelAlSecimiCard(phoneHeight, phoneWidth),
               SizedBox(height: phoneHeight * 0.01),
@@ -59,6 +59,10 @@ class _OrderViewState extends State<OrderView> {
             height: phoneHeight * 0.05,
             child: FilterButtonsListView(phoneWidth,phoneHeight)
         ),
+          SizedBox(
+              width: phoneWidth*0.898,
+              height: phoneHeight * 0.45,
+              child: ProductCard(phoneWidth,phoneHeight)),
   ]),
     ));
   }

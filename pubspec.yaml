@@ -94,6 +94,7 @@ flutter:
     - assets/icons/bottom_navigation_bar/
     - assets/icons/order_page/
     - assets/icons/login_page/
+    - assets/images/products/
 flutter_native_splash:
   # This package generates native code to customize Flutter's default white native splash screen
   # with background color and splash image.

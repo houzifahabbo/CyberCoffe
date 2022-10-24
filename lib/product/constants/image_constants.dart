@@ -11,4 +11,8 @@ class ImageConstants {
   static const String cupIcon = "assets/icons/bottom_navigation_bar/order_page.png";
   static const String locationIcon = "assets/icons/bottom_navigation_bar/location_page.png";
   static const String cardIcon = "assets/icons/bottom_navigation_bar/card_page.png";
+  static const String caramelFrappucino = "assets/images/products/caramel_frappucino.svg";
+  static const String espressoFrappuccino = "assets/images/products/espresso_frappuccino.svg";
+  static const String hazelnutCoffee = "assets/images/products/hazelnut_coffee.svg";
+  static  String mochaFrappuccino = "assets/images/products/mocha_frappuccino.svg";
 }

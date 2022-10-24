@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:coffee/product/constants/image_constants.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../../product/constants/color_scheme.dart';
 
 class PickTimeOrLocation extends StatefulWidget {
@@ -99,6 +99,7 @@ class _FilterButtonsListViewState extends State<FilterButtonsListView> {
   onSelected(int index) {
     setState(() => selectedIndex = index);
   }
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -119,7 +120,7 @@ class _FilterButtonsListViewState extends State<FilterButtonsListView> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
                   side: const BorderSide(color: AppColorScheme.buttonGrey)),
-              onPressed: ()=>onSelected(index),
+              onPressed: () => onSelected(index),
               child: Container(
                 margin:
                     EdgeInsets.symmetric(horizontal: widget.phoneWidth * 0.02),
@@ -131,11 +132,85 @@ class _FilterButtonsListViewState extends State<FilterButtonsListView> {
               ));
         });
   }
-
 }
+
 List<String> filterLabel = [
   "Çok Satanlar",
   "Yiyecek",
   "Yeniler",
   "Kahveler",
 ];
+
+class ProductCard extends StatefulWidget {
+  double phoneWidth, phoneHeight;
+  ProductCard(this.phoneWidth, this.phoneHeight, {Key? key}) : super(key: key);
+
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      separatorBuilder: (context, index) => SizedBox(
+        height: widget.phoneHeight * 0.025,
+      ),
+      shrinkWrap: false,
+      padding: EdgeInsets.symmetric(vertical: widget.phoneHeight * 0.025),
+      scrollDirection: Axis.vertical,
+      itemCount: details.length,
+      itemBuilder: (context, index) {
+        return productCardGetter(index, widget.phoneWidth);
+      },
+    );
+  }
+}
+
+class ProductDetails {
+  String productPhoto, productName;
+  String productPrice;
+  ProductDetails(this.productPhoto, this.productName, this.productPrice);
+}
+
+List<ProductDetails> details = [
+  ProductDetails(ImageConstants.hazelnutCoffee, "Hazelnut Coffee", "20 TL"),
+  ProductDetails(
+      ImageConstants.caramelFrappucino, "Caramel Frappucino", "20 TL"),
+  ProductDetails(ImageConstants.mochaFrappuccino, "Mocha Frappuccino", "20 TL"),
+  ProductDetails(
+      ImageConstants.espressoFrappuccino, "Espresso Frappuccino", "20 TL"),
+];
+productCardGetter(int index, double phoneWidth) {
+  ProductDetails instance = details[index];
+  return Expanded(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Image.asset("assets/images/products/Bg.png"),
+        Container(
+            padding: EdgeInsets.only(left: 20),
+            child: Column(
+                children: [
+              Text(
+                instance.productName,
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+                Text(
+                  instance.productPrice,
+                  style: TextStyle(fontSize: 20),
+                ),
+                ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColorScheme.mainAppGreen),
+                    child: Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: phoneWidth * 0.02),
+                        child: Text("Ekle", style: TextStyle(fontSize: 16)))),
+              ]),
+            ),
+      ],
+    ),
+  );
+}
