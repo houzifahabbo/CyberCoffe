@@ -4,6 +4,8 @@ import 'package:coffee/view/home/view/home_view.dart';
 import 'package:coffee/view/auth/login/view/login_view.dart';
 import 'package:coffee/view/view_model/bottom_nav_bar/bottom_nav_bar_view_model.dart';
 
+import 'example.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -34,10 +36,11 @@ class Values extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/login',
+        initialRoute: '/bottom',
         routes: {
           '/bottom': (context) => MainBottomNavBar(selectedIndex: 1),
           '/login': (context) => const LoginView(),
+          //'/example': (context) => const Example(),
           '/home': (context) => const HomeView(),
           '/order': (context) => const OrderView(),
         }
