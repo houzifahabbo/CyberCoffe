@@ -1,4 +1,3 @@
-import 'package:coffee/product/constants/color_scheme.dart';
 import 'package:coffee/view/order/order_view/order_view.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee/view/home/view/home_view.dart';
@@ -33,11 +32,9 @@ class Values extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double phoneWidth=MediaQuery.of(context).size.width;
-    double phoneHeight = MediaQuery.of(context).size.height;
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/bottom',
+        initialRoute: '/login',
         routes: {
           '/bottom': (context) => MainBottomNavBar(selectedIndex: 1),
           '/login': (context) => const LoginView(),

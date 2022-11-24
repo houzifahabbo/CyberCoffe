@@ -2,9 +2,10 @@ import 'package:coffee/product/constants/image_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee/view/order/order_view_model/order_view_model.dart';
+import 'package:coffee/view/order/order_view_model/product_details_card.dart';
+import 'package:coffee/view/order/order_view_model/filter_buttons.dart';
 import '../../../../product/constants/color_scheme.dart';
 import 'package:coffee/view/view_model/app_bar/app_bar_view_model.dart';
-import 'package:coffee/view/view_model/bottom_nav_bar/bottom_nav_bar_view_model.dart';
 
 class OrderView extends StatefulWidget {
   const OrderView({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class _OrderViewState extends State<OrderView> {
         ),
           SizedBox(
               width: phoneWidth*0.898,
-              height: phoneHeight * 0.45,
+              height: phoneHeight * 0.49,
               child: ProductCard(phoneWidth,phoneHeight)),
   ]),
     ));
