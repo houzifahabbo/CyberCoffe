@@ -1,3 +1,5 @@
+import 'package:coffee/core/extensions/context_extensions.dart';
+import 'package:coffee/core/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee/product/constants/image_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -79,7 +81,7 @@ Row quantityAndSize(double phoneWidth, double phoneHeight) {
           ],
         ),
       ),
-      DropDownMenu(phoneWidth, phoneHeight),
+      DropDownMenu(phoneWidth),
      Container(
        height: phoneHeight*0.043,
           width: phoneWidth*0.10,
@@ -127,8 +129,8 @@ Text productNameText(ProductDetails instance) {
 }
 
 class DropDownMenu extends StatefulWidget {
-  double phoneWidth,phoneHeight;
-  DropDownMenu(this.phoneWidth, this.phoneHeight,{Key? key}) : super(key: key);
+  double phoneWidth;
+  DropDownMenu(this.phoneWidth,{Key? key}) : super(key: key);
 
   @override
   State<DropDownMenu> createState() => _DropDownMenuState();
@@ -139,7 +141,8 @@ class _DropDownMenuState extends State<DropDownMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.phoneHeight * 0.043,
+      height: context.height * 0.043,
+      //widget.phoneHeight * 0.043,
       decoration: BoxDecoration(
           color: AppColorScheme.buttonGrey,
           borderRadius: BorderRadius.circular(5),),

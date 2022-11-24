@@ -31,7 +31,7 @@ class _FilterButtonsListViewState extends State<FilterButtonsListView> {
               style: TextButton.styleFrom(
                   foregroundColor: AppColorScheme.shadow,
                   backgroundColor:
-                  selectedIndex != null && selectedIndex == index
+                  selectedIndex == index
                       ? AppColorScheme.buttonGrey
                       : Colors.white,
                   shape: RoundedRectangleBorder(

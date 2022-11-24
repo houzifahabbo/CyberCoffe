@@ -1,3 +1,4 @@
+import 'package:coffee/core/extensions/context_extensions.dart';
 import 'package:coffee/product/constants/image_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,8 @@ class _OrderViewState extends State<OrderView> {
     return Scaffold(
         appBar: mainAppBar("Sipariş Yarat"),
         body: Padding(
-            padding: EdgeInsets.symmetric(vertical: phoneHeight * 0.02),
+            padding: context.paddingNormalVertical,
+            //EdgeInsets.symmetric(vertical: context.padd),
             child: Column(children: [
               gelAlSecimiCard(phoneHeight, phoneWidth),
               SizedBox(height: phoneHeight * 0.01),

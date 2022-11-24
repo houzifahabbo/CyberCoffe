@@ -12,5 +12,5 @@ class AppColorScheme {
   static const Color mainAppDarkerGrey= Color(0xff4d5661);
   static const Color mainAppDarkestGrey = Color(0xff2e2d38);
   static const Color buttonGrey = Color(0xffdfe4ec);
-  static Color shadow = Color(0xff404247);
+  static const Color shadow = Color(0xff404247);
 }
