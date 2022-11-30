@@ -43,7 +43,7 @@ class _LoginViewState extends State<LoginView> {
         ));
   }
 
-  Padding welcomeBackText(double phoneHeight) {
+  Widget welcomeBackText(double phoneHeight) {
     return Padding(
       padding: EdgeInsets.only(top: phoneHeight * 0.02),
       child: const Text(
@@ -62,36 +62,6 @@ class _LoginViewState extends State<LoginView> {
           color: Color(0xff4d5661),
           fontSize: 16,
         ),
-      ),
-    );
-  }
-
-  Widget forgotPassword(double phoneHeight, double phoneWidth) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Padding(
-          padding: EdgeInsets.only(top: phoneHeight * 0.05),
-          child: InkWell(
-              onTap: () {
-                //model.navigateToPage(context, 'forgotpassword');
-                model.login();
-              },
-              child: const Text('Forgot your password?', style: TextStyle(color: AppColorScheme.mainAppDarkerGrey)))),
-    );
-  }
-
-  Widget loginButton(double phoneWidth, double phoneHeight, BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: phoneHeight * 0.05),
-      child: ElevatedButton(
-        onPressed: () {
-          model.navigateToPage(context, '/bottom');
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColorScheme.mainAppGreen,
-          padding: EdgeInsets.symmetric(vertical: phoneWidth * 0.05, horizontal: phoneHeight * 0.1),
-        ),
-        child: const Center(child: Text('Login')),
       ),
     );
   }
@@ -124,5 +94,35 @@ class _LoginViewState extends State<LoginView> {
                                 }),
                           )
                         : null))));
+  }
+
+  Widget forgotPassword(double phoneHeight, double phoneWidth) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+          padding: EdgeInsets.only(top: phoneHeight * 0.05),
+          child: InkWell(
+              onTap: () {
+                //model.navigateToPage(context, 'forgotpassword');
+                model.login();
+              },
+              child: const Text('Forgot your password?', style: TextStyle(color: AppColorScheme.mainAppDarkerGrey)))),
+    );
+  }
+
+  Widget loginButton(double phoneWidth, double phoneHeight, BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: phoneHeight * 0.05),
+      child: ElevatedButton(
+        onPressed: () {
+          model.navigateToPage(context, '/bottom');
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColorScheme.mainAppGreen,
+          padding: EdgeInsets.symmetric(vertical: phoneWidth * 0.05, horizontal: phoneHeight * 0.1),
+        ),
+        child: const Center(child: Text('Login')),
+      ),
+    );
   }
 }

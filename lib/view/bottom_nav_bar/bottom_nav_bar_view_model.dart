@@ -1,8 +1,8 @@
 import 'package:coffee/product/constants/image_constants.dart';
 import 'package:coffee/view/home/view/home_view.dart';
-import 'package:coffee/view/order/order_view/order_view.dart';
 import 'package:flutter/material.dart';
 import '../../../product/constants/color_scheme.dart';
+import '../order_select/order_select_view/order_select_view.dart';
 
 class MainBottomNavBar extends StatefulWidget {
   int selectedIndex;

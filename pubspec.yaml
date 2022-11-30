@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^2.2.10+1
   flutter_svg: ^1.1.6
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -115,7 +116,7 @@ flutter_native_splash:
 
   # The image parameter allows you to specify an image used in the splash screen.  It must be a
   # png file and should be sized for 4x pixel density.
-  image: assets/splash.png
+  image: assets/launch_image.png
 
   # The branding property allows you to specify an image used as branding in the splash screen.
   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
@@ -173,7 +174,7 @@ flutter_native_splash:
 
   # Platform specific images can be specified with the following parameters, which will override
   # the respective image parameter.  You may specify all, selected, or none of these parameters:
-  #image_android: assets/splash-android.png
+  image_android: assets/launch_image.png
   #image_dark_android: assets/splash-invert-android.png
   #image_ios: assets/splash-ios.png
   #image_dark_ios: assets/splash-invert-ios.png
