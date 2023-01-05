@@ -1,4 +1,4 @@
-import 'package:coffee/view/bottom_nav_bar/bottom_nav_bar_view_model.dart';
+import 'package:coffee/view/bottom_nav_bar/bottom_nav_bar_view/bottom_nav_bar_view.dart';
 import 'package:coffee/view/order_select/order_select_view/order_select_view.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee/view/home/view/home_view.dart';
@@ -38,7 +38,7 @@ class Values extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/bottom',
         routes: {
-          '/bottom': (context) => MainBottomNavBar(selectedIndex: 1),
+          '/bottom': (context) => MainBottomNavBar(),
           '/login': (context) => const LoginView(),
           '/home': (context) => const HomeView(),
           '/order': (context) => const OrderView(),
