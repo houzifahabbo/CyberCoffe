@@ -44,7 +44,7 @@ class _FilterButtonsListViewState extends State<FilterButtonsListView> {
                 child: Text(filterLabel[index],
                     style: const TextStyle(
                       fontSize: 16,
-                      color: AppColorScheme.mainAppDarkestGrey,
+                      color: AppColorScheme.mainAppDark,
                     )),
               ));
         });

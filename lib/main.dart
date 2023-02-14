@@ -1,12 +1,21 @@
+import 'package:coffee/models/user.dart';
+import 'package:coffee/view/auth/login/service/login_service.dart';
+import 'package:coffee/view/auth/login/view/warpper.dart';
 import 'package:coffee/view/bottom_nav_bar/bottom_nav_bar_view/bottom_nav_bar_view.dart';
+import 'package:coffee/view/order_complete/order_complete_view.dart';
+import 'package:coffee/view/order_detail/order_detail_view.dart';
 import 'package:coffee/view/order_select/order_select_view/order_select_view.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee/view/home/view/home_view.dart';
-import 'package:coffee/view/auth/login/view/login_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
-
-
-void main() {
+ void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -34,15 +43,23 @@ class Values extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/bottom',
-        routes: {
-          '/bottom': (context) => MainBottomNavBar(),
-          '/login': (context) => const LoginView(),
-          '/home': (context) => const HomeView(),
-          '/order': (context) => const OrderView(),
-        }
+    return StreamProvider<UserFb?>.value(
+      initialData: null,
+      value: LoginService().user,
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/wrapper',
+          routes: {
+            '/wrapper': (context)=> const Wrapper(),
+            '/bottom': (context) => MainBottomNavBar(),
+            //'/login': (context) =>  LoginView(t),
+            '/home': (context) => const HomeView(),
+            '/order': (context) => const OrderView(),
+            '/orderDetail':(context)=> const OrderDetailView(),
+            //'/productDetail':(context) => const ProductDetailView(),
+            '/orderComplete':(context) => const OrderCompleteView(),
+          }
+      ),
     );
   }
 }

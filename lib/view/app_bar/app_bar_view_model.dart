@@ -1,23 +1,9 @@
-import 'package:coffee/product/constants/image_constants.dart';
-import 'package:flutter/material.dart';
-import '../../../product/constants/color_scheme.dart';
+import 'package:coffee/view/auth/login/service/login_service.dart';
 
-PreferredSizeWidget mainAppBar(String title){
-  return AppBar(
-      backgroundColor: Colors.white,
-    title: Text(title,
-      style: const TextStyle(
-          color: AppColorScheme.mainAppDarkGreen),
-    ),
-    actions: [
-      IconButton(
-        onPressed: () {},
-        icon: Image.asset(ImageConstants.notificationsIcon),
-      ),
-      IconButton(
-        onPressed: () {},
-        icon: Image.asset(ImageConstants.menuIcon),
-      ),
-    ],
-  );
+class AppBarViewModel{
+  final LoginService _auth = LoginService();
+
+  Future <void> logout() async{
+    await _auth.signOut();
+  }
 }

@@ -1,8 +1,15 @@
 import 'package:coffee/product/constants/image_constants.dart';
+import 'package:coffee/view/order_select/order_select_view_model/product_model.dart';
+import 'package:coffee/view/product_detial/view/product_detail_view.dart';
+import 'package:flutter/material.dart';
 
 class ProductDetailsCardViewModel {
   int productQuantity = 0 ;
   bool isHidden=true;
+
+  void navigateToPage(BuildContext context, ProductModel productModel) {
+    Navigator.push(context,MaterialPageRoute(builder: (context)=> ProductDetailView(product: productModel)));
+  }
 
   void increaseQuantity(){
     if(productQuantity==0){

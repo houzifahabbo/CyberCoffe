@@ -1,7 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:coffee/core/extensions/context_extensions.dart';
+import 'package:coffee/shimmer_view.dart';
+import 'package:coffee/storage_service.dart';
 import 'package:coffee/view/order_select/order_select_view_model/product_details_card_view_model.dart';
+import 'package:coffee/view/order_select/order_select_view_model/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../product/constants/color_scheme.dart';
 
 class ProductCard extends StatelessWidget {
@@ -10,24 +14,31 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final products =  Provider.of<List<ProductModel>?>(context)??[];
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
-      separatorBuilder: (context, index) => SizedBox(height: phoneHeight * 0.025,),
+      separatorBuilder: (context, index) => SizedBox(
+        height: phoneHeight * 0.025,
+      ),
       shrinkWrap: false,
       padding: EdgeInsets.symmetric(vertical: phoneHeight * 0.025),
       scrollDirection: Axis.vertical,
-      itemCount: details.length,
+      itemCount: products.length,
       itemBuilder: (context, index) {
-        return ProductCardGetter(index: index, phoneWidth:phoneWidth, phoneHeight: phoneHeight);
+        return ProductCardGetter(product: products[index]);
+
       },
     );
   }
 }
 
 class ProductCardGetter extends StatefulWidget {
-  int index;
-  double phoneWidth, phoneHeight;
-  ProductCardGetter({required this.index, required this.phoneWidth, required this.phoneHeight, Key? key,}) : super(key: key);
+  final ProductModel product;
+
+  const ProductCardGetter({
+    required this.product,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ProductCardGetter> createState() => _ProductCardGetterState();
@@ -35,48 +46,61 @@ class ProductCardGetter extends StatefulWidget {
 
 class _ProductCardGetterState extends State<ProductCardGetter> {
   ProductDetailsCardViewModel model = ProductDetailsCardViewModel();
-
+  final StorageServices storage = StorageServices();
   @override
   Widget build(BuildContext context) {
-    ProductDetails instance = details[widget.index];
-
-    return Row(children: [
-      Image.asset(instance.productPhoto),
-      Expanded(
-        child: Container(
-          padding: EdgeInsets.only(left: widget.phoneWidth * 0.05),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                productNameText(instance),
-                productPriceText(instance),
-                const SizedBox(height: 7),
-                if (model.isHidden)
-                  (addProductButton(context.width,model))
-                else
-                  quantityAndSize(context.width,model)
-              ]
-          ),
-        ),
-      )
-    ]);
+    final double phoneWidth = MediaQuery.of(context).size.width;
+    return FutureBuilder(
+        future: storage.downloadURL(widget.product.image!),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.hasData) {
+            return GestureDetector(
+                onTap: () {
+                  model.navigateToPage(context,widget.product);
+                },
+                child: Row(children: [
+                  Image.network(snapshot.data!),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: phoneWidth * 0.05),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            productNameText(widget.product.name!),
+                            productPriceText(widget.product.price!),
+                            const SizedBox(height: 7),
+                            if (model.isHidden)
+                              (addProductButton(context.width, model))
+                            else
+                              quantityAndSize(model)
+                          ]),
+                    ),
+                  )
+                ]));
+          }
+          if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
+            return productDetailsCardShimmer(phoneWidth);
+          }
+          return Container();
+        });
   }
-  Widget productNameText(ProductDetails instance) {
+
+  Widget productNameText(String name) {
     return AutoSizeText(
-      instance.productName,
+      name,
       maxLines: 1,
       style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
     );
   }
 
-  Widget productPriceText(ProductDetails instance) {
+  Widget productPriceText(String price) {
     return Text(
-      instance.productPrice,
+      '$price TL',
       style: const TextStyle(fontSize: 20),
     );
   }
 
-  Widget addProductButton(phoneWidth,ProductDetailsCardViewModel model) {
+  Widget addProductButton(phoneWidth, ProductDetailsCardViewModel model) {
     return Container(
       padding: EdgeInsets.only(left: phoneWidth * 0.385),
       alignment: Alignment.bottomRight,
@@ -94,12 +118,12 @@ class _ProductCardGetterState extends State<ProductCardGetter> {
     );
   }
 
-  Widget quantityAndSize(phoneWidth,ProductDetailsCardViewModel model) {
+  Widget quantityAndSize(ProductDetailsCardViewModel model) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          width: 105,
+          width: 107,
           height: 30,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
@@ -117,7 +141,6 @@ class _ProductCardGetterState extends State<ProductCardGetter> {
                   color: AppColorScheme.mainAppDarkerGrey,
                   size: 15,
                 ),
-                hoverColor: Colors.red,
               ),
               Text(
                 "${model.productQuantity}",
@@ -136,7 +159,7 @@ class _ProductCardGetterState extends State<ProductCardGetter> {
             ],
           ),
         ),
-        DropDownMenu(widget.phoneWidth),
+        const DropDownMenu(),
         Container(
           height: 30,
           width: 30,
@@ -146,25 +169,42 @@ class _ProductCardGetterState extends State<ProductCardGetter> {
           ),
           child: IconButton(
               onPressed: () {
-                print("c");
+                //model.navigateToPage(context, '/orderDetail');
               },
               icon: const Icon(Icons.check, color: Colors.white, size: 15)),
         )
       ],
     );
   }
+
+
 }
 
+Widget productDetailsCardShimmer(double phoneWidth) =>
+    Row(children: [
+      const ShimmerView.circular(height: 87, width: 87),
+      Expanded(
+        child: Container(
+          padding: EdgeInsets.only(left: phoneWidth * 0.05),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                ShimmerView.rectangular(height: 25, width: 150,),
+                SizedBox(height: 5),
+                ShimmerView.rectangular(height: 20, width: 50,),
+                SizedBox(height: 5),
+              ]),
+        ),
+      )
+    ]);
 class DropDownMenu extends StatefulWidget {
-  double phoneWidth;
-  DropDownMenu(this.phoneWidth, {Key? key}) : super(key: key);
+  const DropDownMenu({Key? key}) : super(key: key);
 
   @override
   State<DropDownMenu> createState() => _DropDownMenuState();
 }
 
 class _DropDownMenuState extends State<DropDownMenu> {
-
   @override
   Widget build(BuildContext context) {
     return Container(

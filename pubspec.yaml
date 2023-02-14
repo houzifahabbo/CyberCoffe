@@ -37,6 +37,18 @@ dependencies:
   flutter_native_splash: ^2.2.10+1
   flutter_svg: ^1.1.6
   auto_size_text: ^3.0.0
+  flutter_svg_provider: ^1.0.3
+  percent_indicator: ^4.2.2
+  sleek_circular_slider: ^2.0.1
+  sqflite: ^2.2.2
+  firebase_core: ^2.4.1
+  firebase_auth: ^4.2.5
+  cloud_firestore: ^4.3.1
+  provider: ^6.0.5
+  flutter_spinkit: ^5.1.0
+  firebase_storage: ^11.0.10
+  shimmer: ^2.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -91,11 +103,15 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - assets/
+    - assets/images/home_page/
+    - assets/icons/home_page/
     - assets/icons/app_bar/
     - assets/icons/bottom_navigation_bar/
     - assets/icons/order_page/
     - assets/icons/login_page/
+    - assets/icons/product_detail_page/
     - assets/images/products/
+    - assets/images/order_page/
 flutter_native_splash:
   # This package generates native code to customize Flutter's default white native splash screen
   # with background color and splash image.
