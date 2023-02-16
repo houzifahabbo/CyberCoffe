@@ -28,11 +28,11 @@ class LoginService {
     }
   }
 
-  Future register(String email,String password) async {
+  Future register(String email,String password,String fullName,String phoneNum) async {
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
-      await DataBaseService(uid: user?.uid).updateUserData('uFName', 'uLName', '0', '0000000000');
+      await DataBaseService(uid: user?.uid).updateUserData(fullName, '0', phoneNum);
       return _userFromFirebase(user!);
     }catch(e){
       print(e.toString());

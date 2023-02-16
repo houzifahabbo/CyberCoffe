@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
+
  void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -27,20 +28,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const Values(),
-    }
-    );
-  }
-}
-class Values extends StatelessWidget {
-  const Values({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return StreamProvider<UserFb?>.value(
@@ -63,3 +50,4 @@ class Values extends StatelessWidget {
     );
   }
 }
+

@@ -33,8 +33,7 @@ class _LoginViewState extends State<LoginView> {
       backgroundColor: AppColorScheme.mainAppGrey,
       body: Container(
         decoration: const BoxDecoration(
-            image:
-                DecorationImage(image: AssetImage(ImageConstants.background))),
+            image: DecorationImage(image: AssetImage(ImageConstants.background))),
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: phoneWidth * 0.05) +

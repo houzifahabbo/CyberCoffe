@@ -18,10 +18,9 @@ class DataBaseService{
     });
   }
 
-  Future updateUserData(String uFName, String uLName, String uBalance, String uPhoneNum ) async {
+  Future updateUserData(String uFullName, String uBalance, String uPhoneNum ) async {
     return await userInfoCollection.doc(uid).set({
-      'uFName': uFName,
-      'uLName': uLName,
+      'uFullName': uFullName,
       'uBalance':uBalance,
       'uPhoneNum':uPhoneNum,
     });

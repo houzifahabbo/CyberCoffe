@@ -4,25 +4,51 @@ class RegisterViewModel{
   final LoginService _auth = LoginService();
   String email='';
   String password='';
+  String fullName='';
+  String phoneNum='';
   String error ='';
   bool isLoading = false;
   final registerKey = GlobalKey<FormState>();
 
   Future <void> register() async{
     if(registerKey.currentState!.validate()){
-      dynamic result = await _auth.register(email, password);
+      dynamic result = await _auth.register(email, password,fullName,phoneNum);
       if (result == null ){
         error = 'please enter a valid email';
         isLoading =false;
       }
     }
   }
-  void onChanged(val,bool isItPassword){
-    if(isItPassword == true){
-      password = val;
+  String? validator(String label,String val){
+    if(label == 'Password'){
+      if(val.length < 8) {
+        return 'Enter a password 8+ chars long';
+      }
     }
-    else{
-      email = val;
+    if(label == 'Phone Number'){
+      if(val.length != 10){
+         return 'Enter a valid phone number';
+      }
+    }
+    if(val.isEmpty){
+      return 'Enter Your $label';
+    }
+    return null;
+  }
+  void onChanged(val,String label){
+    switch (label){
+      case 'Password':
+        password = val;
+        break;
+      case 'Email':
+        email = val;
+        break;
+      case 'Full Name':
+        fullName = val;
+        break;
+      case 'Phone Number':
+        phoneNum=val;
+        break;
     }
   }
 }
