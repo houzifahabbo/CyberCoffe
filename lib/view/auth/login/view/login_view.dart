@@ -121,7 +121,7 @@ class _LoginViewState extends State<LoginView> {
         child: SizedBox(
             width: textfieldModel.phoneWidth * 0.9,
             child: TextFormField(
-                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                validator: (val) => model.validator(textfieldModel.label, val!),
                 obscureText: textfieldModel.label == "Password"
                     ? textfieldModel.isHidden
                     : textfieldModel.isHidden == false,

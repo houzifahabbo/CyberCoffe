@@ -33,6 +33,18 @@ class LoginViewModel {
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const ForgotPasswordView()));
   }
 
+  String? validator(String label,String val){
+    if(label == 'Password'){
+      if(val.length < 6) {
+        return 'Enter a password 6+ chars long';
+      }
+    }
+    if(val.isEmpty){
+      return 'Enter Your $label';
+    }
+    return null;
+  }
+
   void onChanged(val,bool isItPassword){
     if(isItPassword == true){
       password = val;

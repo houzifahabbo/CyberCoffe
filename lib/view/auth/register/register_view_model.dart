@@ -22,8 +22,8 @@ class RegisterViewModel{
   }
   String? validator(String label,String val){
     if(label == 'Password'){
-      if(val.length < 8) {
-        return 'Enter a password 8+ chars long';
+      if(val.length < 6) {
+        return 'Enter a password 6+ chars long';
       }
     }
     if(label == 'Phone Number'){
