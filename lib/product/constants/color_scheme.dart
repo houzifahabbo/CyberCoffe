@@ -15,6 +15,6 @@ class AppColorScheme {
   static const Color shadow = Color(0xff404247);
   static const Color mainAppSoftGrey=Color(0xffeff4fd);
   static const Color gold=Color(0xffc1a063);
-  static const Color error=Color(0xffd62e3e);
+  static const Color error=Color(0xffcb3332);
 
 }

@@ -28,7 +28,7 @@ PreferredSizeWidget mainAppBarWithLeading(String title,BuildContext context) {
       ),
       IconButton(
         onPressed: () {},
-        icon: Image.asset(ImageConstants.menuIcon),
+        icon: const Icon(Icons.logout_outlined),
       ),
     ],
   );
@@ -45,15 +45,15 @@ PreferredSizeWidget mainAppBar(String title){
           color: AppColorScheme.mainAppDarkGreen),
     ),
     actions: [
-      IconButton(
-        onPressed: () {},
-        icon: Image.asset(ImageConstants.notificationsIcon),
-      ),
+      // IconButton(
+      //   onPressed: () {},
+      //   icon: Image.asset(ImageConstants.notificationsIcon),
+      // ),
       IconButton(
         onPressed: () {
           model.logout();
         },
-        icon: Image.asset(ImageConstants.menuIcon),
+        icon: const Icon(Icons.logout_outlined),
       ),
     ],
   );

@@ -1,4 +1,5 @@
 import 'package:coffee/models/user.dart';
+import 'package:coffee/view/auth/forgot_password_view.dart';
 import 'package:coffee/view/auth/login/service/login_service.dart';
 import 'package:coffee/view/auth/login/view/warpper.dart';
 import 'package:coffee/view/bottom_nav_bar/bottom_nav_bar_view/bottom_nav_bar_view.dart';
@@ -43,7 +44,6 @@ class _MyAppState extends State<MyApp> {
             '/home': (context) => const HomeView(),
             '/order': (context) => const OrderView(),
             '/orderDetail':(context)=> const OrderDetailView(),
-            //'/productDetail':(context) => const ProductDetailView(),
             '/orderComplete':(context) => const OrderCompleteView(),
           }
       ),

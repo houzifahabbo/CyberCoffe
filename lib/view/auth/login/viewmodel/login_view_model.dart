@@ -1,3 +1,4 @@
+import 'package:coffee/view/auth/forgot_password_view.dart';
 import 'package:coffee/view/auth/login/service/login_service.dart';
 import 'package:flutter/material.dart';
 
@@ -28,8 +29,8 @@ class LoginViewModel {
     isHidden = !isHidden;
   }
 
-  void navigateToPage(BuildContext context, String pageName) {
-    Navigator.pushReplacementNamed(context, pageName);
+  void navigateToPage(BuildContext context) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const ForgotPasswordView()));
   }
 
   void onChanged(val,bool isItPassword){

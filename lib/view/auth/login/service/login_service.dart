@@ -1,8 +1,6 @@
 import 'package:coffee/database.dart';
-import 'package:coffee/view/auth/login/viewmodel/login_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:coffee/models/user.dart';
-///Pull the data from the json file with a delay of 2 seconds and get the data on the viewmodel side.
 
 class LoginService {
 
@@ -57,6 +55,15 @@ class LoginService {
     }catch(e){
       print(e.toString());
       return null;
+    }
+  }
+  Future <bool> resetPassword(String email) async{
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return true;
+    } catch(e){
+      print(e.toString());
+      return false;
     }
   }
 

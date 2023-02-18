@@ -8,6 +8,7 @@ class RegisterViewModel{
   String phoneNum='';
   String error ='';
   bool isLoading = false;
+  bool isHidden = true;
   final registerKey = GlobalKey<FormState>();
 
   Future <void> register() async{
@@ -50,6 +51,9 @@ class RegisterViewModel{
         phoneNum=val;
         break;
     }
+  }
+  void togglePasswordView() {
+    isHidden = !isHidden;
   }
 }
 class TextfieldModel {

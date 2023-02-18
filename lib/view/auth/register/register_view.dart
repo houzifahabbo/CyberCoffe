@@ -8,7 +8,7 @@ import '../../../product/constants/color_scheme.dart';
 
 class RegisterView extends StatefulWidget {
   final Function toggle;
-  const RegisterView({required this.toggle,Key? key}) : super(key: key);
+  const RegisterView({required this.toggle, Key? key}) : super(key: key);
 
   @override
   State<RegisterView> createState() => _RegisterViewState();
@@ -21,38 +21,76 @@ class _RegisterViewState extends State<RegisterView> {
     double phoneWidth = MediaQuery.of(context).size.width;
     double phoneHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: AppColorScheme.backgroundGrey,
-      body: model.isLoading? const LoadingView() :
-    Container(
-    decoration: const BoxDecoration(
-    image:
-    DecorationImage(image: AssetImage(ImageConstants.background))),
-    child: SafeArea(
-        child: Center(
-          child: Form(
-            key: model.registerKey,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColorScheme.backgroundGrey,
+        body: model.isLoading
+            ? const LoadingView()
+            : Container(
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(ImageConstants.background))),
+                child: SafeArea(
+                    child: Form(
+                  key: model.registerKey,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      textField(textfieldModel: TextfieldModel(phoneHeight: phoneHeight, phoneWidth: phoneWidth, label: 'Email', isHidden: true)),
-                      textField(textfieldModel: TextfieldModel(phoneHeight: phoneHeight, phoneWidth: phoneWidth, label: 'Password', isHidden: true),),
-                      textField(textfieldModel: TextfieldModel(phoneHeight: phoneHeight, phoneWidth: phoneWidth, label: 'Full Name', isHidden: true),),
-                      textField(textfieldModel: TextfieldModel(phoneHeight: phoneHeight, phoneWidth: phoneWidth, label: 'Phone Number', isHidden: true),),
-                      Text(model.error,style: const TextStyle( color: Colors.red),),
+                      Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          alignment: Alignment.centerLeft,
+                          child: Image.asset(ImageConstants.starTitle)),
+                      textField(
+                          textfieldModel: TextfieldModel(
+                              phoneHeight: phoneHeight,
+                              phoneWidth: phoneWidth,
+                              label: 'Email',
+                              isHidden: true)),
+                      textField(
+                        textfieldModel: TextfieldModel(
+                            phoneHeight: phoneHeight,
+                            phoneWidth: phoneWidth,
+                            label: 'Password',
+                            isHidden: model.isHidden),
+                      ),
+                      textField(
+                        textfieldModel: TextfieldModel(
+                            phoneHeight: phoneHeight,
+                            phoneWidth: phoneWidth,
+                            label: 'Full Name',
+                            isHidden: true),
+                      ),
+                      textField(
+                        textfieldModel: TextfieldModel(
+                            phoneHeight: phoneHeight,
+                            phoneWidth: phoneWidth,
+                            label: 'Phone Number',
+                            isHidden: true),
+                      ),
+                      Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            model.error,
+                            style: const TextStyle(color: AppColorScheme.error),
+                          )),
                       registerButton(phoneWidth, context),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Already have an account? ",style: TextStyle(color: AppColorScheme.mainAppDarkerGrey)),
+                          const Text("Already have an account? ",
+                              style: TextStyle(
+                                  color: AppColorScheme.mainAppDarkerGrey)),
                           clickableText('Sign in', widget.toggle),
                         ],
                       )
                     ],
                   ),
-              ),
-        )
-      ),
-    ));
+                )),
+              ));
   }
+
   Widget textField({required TextfieldModel textfieldModel}) {
     Widget visibilityIcon = SvgPicture.asset(ImageConstants.visibilityIcon);
     return Container(
@@ -60,15 +98,21 @@ class _RegisterViewState extends State<RegisterView> {
         child: SizedBox(
             width: textfieldModel.phoneWidth * 0.9,
             child: TextFormField(
-              inputFormatters: textfieldModel.label == 'Phone Number'?<TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]:null,
-              keyboardType: textfieldModel.label == 'Phone Number'?TextInputType.number:null,
-                validator: (val)=>model.validator(textfieldModel.label,val!),
+                inputFormatters: textfieldModel.label == 'Phone Number'
+                    ? <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ]
+                    : null,
+                keyboardType: textfieldModel.label == 'Phone Number'
+                    ? TextInputType.number
+                    : null,
+                validator: (val) => model.validator(textfieldModel.label, val!),
                 obscureText: textfieldModel.label == "Password"
                     ? textfieldModel.isHidden
                     : textfieldModel.isHidden == false,
                 onChanged: (val) {
                   setState(() {
-                    model.onChanged(val,textfieldModel.label);
+                    model.onChanged(val, textfieldModel.label);
                   });
                 },
                 decoration: InputDecoration(
@@ -78,34 +122,32 @@ class _RegisterViewState extends State<RegisterView> {
                     fillColor: Colors.white,
                     focusedBorder: const OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: AppColorScheme.lightGrey)),
+                            BorderSide(color: AppColorScheme.lightGrey)),
                     enabledBorder: const OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: AppColorScheme.lightGrey)),
+                            BorderSide(color: AppColorScheme.lightGrey)),
                     labelText: textfieldModel.label,
-                    suffixIcon: textfieldModel.label == "Password" ?
-                    IconButton(
-                          icon: visibilityIcon,
-                          onPressed: () {
-                            widget.toggle;
-                            setState(() {});
-                          })
-                        : null
-                )
-            )
-        )
-    );
+                    suffixIcon: textfieldModel.label == "Password"
+                        ? IconButton(
+                            icon: visibilityIcon,
+                            onPressed: () {
+                              model.togglePasswordView();
+                              setState(() {});
+                            })
+                        : null))));
   }
 
-  Widget registerButton(double phoneWidth,BuildContext context) {
+  Widget registerButton(double phoneWidth, BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 20,bottom: 10),
-      width: phoneWidth*0.9,
+      margin: const EdgeInsets.only(top: 20, bottom: 10),
+      width: phoneWidth * 0.9,
       height: 50,
       child: ElevatedButton(
-        onPressed: () async{
-          if(model.registerKey.currentState!.validate()){
-            setState(() {model.isLoading = true;});
+        onPressed: () async {
+          if (model.registerKey.currentState!.validate()) {
+            setState(() {
+              model.isLoading = true;
+            });
           }
           await model.register();
           setState(() {});
@@ -117,12 +159,14 @@ class _RegisterViewState extends State<RegisterView> {
       ),
     );
   }
+
   Widget clickableText(String label, Function onTap) {
     return InkWell(
-              onTap: () {
-                onTap();
-              },
-              child: Text(label,style: const TextStyle(color: AppColorScheme.mainAppDarkerGrey)),
+      onTap: () {
+        onTap();
+      },
+      child: Text(label,
+          style: const TextStyle(color: AppColorScheme.mainAppDarkerGrey)),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'package:coffee/product/constants/color_scheme.dart';
 import 'package:coffee/product/constants/image_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 class LoadingView extends StatelessWidget {
   const LoadingView({Key? key}) : super(key: key);
 
